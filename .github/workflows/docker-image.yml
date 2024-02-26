@@ -18,6 +18,11 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USER_NAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile
+
       
     - name: Build and push
       id: docker_build
@@ -25,7 +30,3 @@ jobs:
       with:
         push: true
         tags: guzman83/node-js-env:latest
-    
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile
